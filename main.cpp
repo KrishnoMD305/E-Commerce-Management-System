@@ -1,4 +1,5 @@
 #include<iostream>
+#include<sstream> // for string string manipulation
 using namespace std;
 
 
@@ -20,6 +21,7 @@ public:
 
     // These functions will be overriden in child class
     // child classes will give self defination of their own
+    // pure virtual function
     virtual void displayDetails()const = 0;
     virtual string getType()const = 0;
     virtual string serialize()const = 0;
@@ -64,7 +66,25 @@ public:
     DigitalProduct(int i, string n, float p, int s, string link, float size): Product(i,n,p,s), downloadLink(link), fileSize(size){}
 
 
+    // overriding the ppure virtual function of base class
+    // shows digital products info
+    void displayDetails()const override{
+        cout<<"[Digital Product]\n";
+        cout<<"  ID: "<<id<<" | Name: "<<name<<" | Price: $"<<price<<" | Stock: "<<stock<<"\n";
+        cout<<"  Download Link: "<<downloadLink<<" | Size: "<<fileSize<<" MB\n";
+    }
 
+    // get the type digital
+    string getType()const override{
+        return "Digital";
+    }
+
+    // serialize the digital products list for saving to file
+    string serialize()const override{
+        stringstream ss; 
+        ss<<"DIGITAL|"<<id<<"|"<<name<<"|"<<price<<"|"<<stock<<"|"<<downloadLink<<"|"<<fileSize;
+        return ss.str();
+    }
 
 };
 
