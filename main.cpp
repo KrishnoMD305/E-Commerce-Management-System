@@ -18,6 +18,10 @@ public:
         totalProducts++; // increases static counter every time a new product is creted
     }
 
+    // virtual destructor
+    virtual ~Product(){}
+    // if not added a virtual destructor in base class it will not call child destructor
+
 
     // These functions will be overriden in child class
     // child classes will give self defination of their own
@@ -86,6 +90,8 @@ public:
         return ss.str();
     }
 
+    ~DigitalProduct(){}
+
 };
 
 // also inherited from product
@@ -123,6 +129,8 @@ public:
         // convert the stream into string and returns it
     }
 
+
+    ~PhysicalProduct(){}
 
 };
 
