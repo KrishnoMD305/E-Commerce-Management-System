@@ -18,6 +18,14 @@ public:
     }
 
 
+    // getters method 
+    // used const so that the function cannot modify the data
+    int getID()const{return id; }
+    string getName()const{return name;}
+    float getPrice()const{return price;}
+    int getStock()const{return stock;}
+
+
 
 };
 // Main system class for everything
