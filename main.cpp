@@ -41,6 +41,19 @@ public:
 
 
 };
+
+int Product::totalProducts = 0; //initializes the static variable
+
+// Inherited from product
+class DigitalProduct:public Product{
+private:
+    string downloadLink;
+    float fileSize; //MB
+
+
+};
+
+
 // Main system class for everything
 class ECommerceSystem{
 
