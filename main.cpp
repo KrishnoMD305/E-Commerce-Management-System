@@ -89,6 +89,18 @@ public:
 };
 
 
+class PhysicalProduct:public Product{
+private:
+    float weight; // KG
+    string dimensions; // A x B x C
+
+public:
+    
+
+
+};
+
+
 // Main system class for everything
 class ECommerceSystem{
 
