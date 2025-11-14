@@ -88,13 +88,17 @@ public:
 
 };
 
-
+// also inherited from product
 class PhysicalProduct:public Product{
 private:
+// physical products attributes
     float weight; // KG
     string dimensions; // A x B x C
 
 public:
+    //constructor
+    PhysicalProduct(int i, string n, float p, int s, float w, string dim): Product(i,n,p,s), weight(w), dimensions(dim){}
+
     
 
 
