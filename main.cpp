@@ -51,6 +51,13 @@ private:
     float fileSize; //MB
 
 
+public:
+    // Constructor
+    DigitalProduct(int i, string n, float p, int s, string link, float size): Product(i,n,p,s), downloadLink(link), fileSize(size){}
+
+
+
+
 };
 
 
