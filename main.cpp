@@ -26,6 +26,14 @@ public:
     int getStock()const{return stock;}
 
 
+    // setters method
+    // 
+    void setPrice(float p){price = p;}
+    void setStock(int s){stock = s;}
+    void reduceStock(int qty){stock -= qty;}
+
+
+
 
 };
 // Main system class for everything
