@@ -99,7 +99,29 @@ public:
     //constructor
     PhysicalProduct(int i, string n, float p, int s, float w, string dim): Product(i,n,p,s), weight(w), dimensions(dim){}
 
-    
+
+    // overriding pure virtual function from parent class
+
+    // show details
+    void displayDetails()const override{
+        cout<<"  [Physical Product]\n";
+        cout<<"  ID: "<<id<<" | Name: "<<name<<" | Price: $"<<price<<" | Stock: "<<stock<<"\n";
+        cout<<"  Weight: "<<weight<<" kg | Dimensions: "<<dimensions<<"\n";
+    }
+
+    // type - physical
+    string getType()const override{
+        return "Physical";
+    }
+
+
+    // arrange the product detailes for file storage
+    string serialize()const override{
+        stringstream ss;
+        ss<<"PHYSICAL|"<<id<<"|"<<name<<"|"<<price<<"|"<<stock<<"|"<<weight<<"|"<<dimensions;
+        return ss.str(); //
+        // convert the stream into string and returns it
+    }
 
 
 };
