@@ -18,6 +18,14 @@ public:
     }
 
 
+    // These functions will be overriden in child class
+    // child classes will give self defination of their own
+    virtual void displayDetails()const = 0;
+    virtual string getType()const = 0;
+    virtual string serialize()const = 0;
+
+
+
     // getters method 
     // used const so that the function cannot modify the data
     int getID()const{return id; }
