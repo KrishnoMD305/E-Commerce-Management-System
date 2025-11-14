@@ -32,6 +32,11 @@ public:
     void setStock(int s){stock = s;}
     void reduceStock(int qty){stock -= qty;}
 
+    // static function
+    static int getTotalProducts(){
+        return totalProducts;
+    }
+
 
 
 
