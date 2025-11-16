@@ -134,8 +134,14 @@ public:
 
 };
 
+// item + the quantity of that item
+struct CartItem{
+    Product* product;
+    int quantity; // quantity of that product
 
-
+    // Constructor
+    CartItem(Product* p, int q): product(p),quantity(q) {}
+};
 
 
 
