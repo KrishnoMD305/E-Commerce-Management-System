@@ -153,7 +153,21 @@ private:
     list<CartItem> items; 
 
 public:
-    
+    // add product in cart method
+    void addProduct(Product* p, int qty){
+        //checking if the product is already on cart or not
+        for(auto& item : items){
+            // checking by ID
+            if(item.product->getID() == p->getID()){
+                item.quantity += qty; // if existed then just updated the quantity
+                cout<<"  Updated quantity of '"<<p->getName()<<"' in cart.\n";
+                return;
+            }
+        }
+        // if it is not already in cart then push back in the cart
+        items.push_back(CartItem(p,qty));
+        cout<<"  Added '"<<p->getName()<<"' to cart (Qty: "<<qty<<").\n";
+    }
 
 
 };
