@@ -169,6 +169,11 @@ public:
         cout<<"  Added '"<<p->getName()<<"' to cart (Qty: "<<qty<<").\n";
     }
 
+    // Overloaded the addproduct function
+    void addProduct(Product* p){
+        addProduct(p,1); // quantity = 1
+    }
+
 
 };
 
