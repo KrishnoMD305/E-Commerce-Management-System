@@ -174,6 +174,22 @@ public:
         addProduct(p,1); // quantity = 1
     }
 
+    // for showing cart in console
+    void displayCart()const{
+        // if empty then show empty message
+        if(items.empty()){
+            cout<<"  Your cart is empty.\n";
+            return;
+        }
+        cout<<"\n  === YOUR CART ===\n";
+        float total = 0; // for calculating total price
+        for(const auto& item : items){
+            cout<<"  - "<<item.product->getName()<<" x"<<item.quantity<<" @ $"<<item.product->getPrice()<<" each\n";
+            total += item.product->getPrice() * item.quantity; // added in total
+        }
+        cout<<"  Total: $"<<total<<"\n"; // show total
+    }
+
 
 };
 
