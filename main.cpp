@@ -1,5 +1,6 @@
 #include<iostream>
 #include<sstream> // for string string manipulation
+#include<list> // for list<> stl container
 using namespace std;
 
 
@@ -135,12 +136,26 @@ public:
 };
 
 // item + the quantity of that item
+// The cart item will be a struct type
 struct CartItem{
     Product* product;
     int quantity; // quantity of that product
 
     // Constructor
     CartItem(Product* p, int q): product(p),quantity(q) {}
+};
+
+
+class Cart{
+private:
+// the operation in list is O(1)
+// efficient
+    list<CartItem> items; 
+
+public:
+    
+
+
 };
 
 
