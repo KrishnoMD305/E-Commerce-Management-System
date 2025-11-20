@@ -349,6 +349,14 @@ public:
         return "Customer";
     }
 
+    // overridden function
+    // serialize customer data to file
+    string serialize()const override{
+        stringstream ss;
+        ss<<"CUSTOMER|"<<username<<"|"<<password<<"|"<<email;
+        return ss.str();
+    }
+
 
 };
 
