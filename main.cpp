@@ -337,6 +337,18 @@ public:
 
     }
 
+    // override the virtual function
+    void displayInfo()const override{
+        cout<<"  [Customer Profile]\n";
+        User::displayInfo();
+        cout<<"  Total Orders: "<<orderHistory.size()<<"\n";
+    }
+
+    // override
+    string getRole()const override{
+        return "Customer";
+    }
+
 
 };
 
