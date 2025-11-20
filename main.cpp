@@ -298,6 +298,11 @@ public:
         cout<<"  Email: "<<email<<"\n";
     }
 
+    // virtual getrole function
+    virtual string getRole()const{
+        return "User";
+    }
+
 };
 
 int User::totalUsers = 0; // initialize the static member
