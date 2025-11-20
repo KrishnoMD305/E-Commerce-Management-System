@@ -341,6 +341,7 @@ public:
     ~Customer(){}
 
     // override the virtual function
+    // show the customer info
     void displayInfo()const override{
         cout<<"  [Customer Profile]\n";
         User::displayInfo();
@@ -423,6 +424,19 @@ public:
     // destructor
     ~Admin(){
 
+    }
+
+    // overriden the function
+    // display the admin info
+    void displayInfo()const override{
+        cout<<"  [Admin Profile]\n";
+        User::displayInfo();
+        cout<<"  Role: Administrator\n";
+    }
+
+    // override the getrole function
+    string getRole()const override{
+        return "Admin";
     }
 
 
