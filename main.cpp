@@ -371,6 +371,28 @@ public:
         cart.displayCart();
     }
 
+// method for placing order 
+    void placeOrder(){
+        if(cart.isEmpty()){
+            cout<<"  Cart is empty. Add items before placing order.\n";
+            return;
+        }
+
+        float total = cart.calculateTotal();
+        // create a new order object
+        Order newOrder(username, cart.getItems(), total);
+
+        // reduce the stocks forrr  each product
+        for(const auto& item : cart.getItems()){
+            item.product->reduceStock(item.quantity);
+        }
+
+        orderHistory.push_back(newOrder);
+        cout<<"\n  Order placed successfully! Order ID: "<<newOrder.getOrderId()<<"\n";
+        cart.clearCart();
+
+    }
+
 
 };
 
