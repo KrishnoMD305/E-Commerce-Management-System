@@ -462,9 +462,15 @@ public:
 
 };
 
-
+// a friend function of both the order and user classes
+// allows the private and protected member accessing
 void displayOrderSummary(const Order& order, const User& user){
-
+    // const reference is used to avoid unnecessary copying and ensure not modifying objects
+    cout<<"\n  === ORDER SUMMARY ===\n";
+    cout<<"  Order ID: "<<order.orderId<<"\n"; // unique order id
+    cout<<"  Customer: "<<user.username<<" ("<<user.email<<")\n";
+    cout<<"  Total: $"<<order.totalAmount<<"\n"; // total amount customer must pay
+    cout<<"  Status: "<<order.status<<"\n";
 }
 
 
