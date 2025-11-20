@@ -529,6 +529,14 @@ public:
         return result;
     }
 
+    void remove(int key){
+        auto it = storage.find(key);
+        if(it != storage.end()){
+            delete it->second;
+            storage.erase(it);
+        }
+    }
+
 };
 
 
