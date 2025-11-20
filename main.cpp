@@ -326,6 +326,17 @@ int User::totalUsers = 0; // initialize the static member
 
 // inherited from user
 class Customer: public User{
+private:
+    Cart cart;
+    // stores the orders of the customers
+    vector<Order> orderHistory; // store Order objects
+
+public:
+// Constructor
+    Customer(string uname, string pass, string mail) : User(uname,pass,mail){
+
+    }
+
 
 };
 
