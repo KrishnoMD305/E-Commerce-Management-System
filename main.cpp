@@ -416,7 +416,14 @@ public:
 // also inherited from user
 class Admin: public User{
 public:
+// constructor
+    Admin(string uname, string pass, string mail): User(uname,pass,mail){
 
+    }
+    // destructor
+    ~Admin(){
+
+    }
 
 
 };
