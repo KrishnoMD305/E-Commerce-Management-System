@@ -287,6 +287,17 @@ public:
         totalUsers++;
     }
 
+    // virtual destructor
+    virtual ~User(){
+
+    }
+
+    // virtual function for runtime polymorphismmm
+    virtual void displayInfo()const{
+        cout<<"  Username: "<<username<<"\n";
+        cout<<"  Email: "<<email<<"\n";
+    }
+
 };
 
 int User::totalUsers = 0; // initialize the static member
