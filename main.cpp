@@ -509,7 +509,25 @@ public:
         }
     }
 
-    
+    void add(int key, T* item){
+        storage[key] = item;
+    }
+
+    T* get(int key){
+        auto it = storage.find(key);
+        if(it != storage.end()){
+            return it->second;
+        }
+        return nullptr;
+    }
+
+    vector<T*> getAll(){
+        vector<T*> result;
+        for(auto& pair : storage){
+            result.push_back(pair.second);
+        }
+        return result;
+    }
 
 };
 
