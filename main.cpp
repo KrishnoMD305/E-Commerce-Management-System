@@ -537,6 +537,25 @@ public:
         }
     }
 
+    bool exists(int key){
+        return storage.find(key) != storage.end();
+    }
+
+    int size()const{
+        return storage.size();
+    }
+
+    void clear(){
+        for(auto& pair : storage){
+            delete pair.second;
+        }
+        storage.clear();
+    }
+
+    map<int, T*>& getStorage(){
+        return storage;
+    }
+
 };
 
 
