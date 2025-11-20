@@ -232,6 +232,19 @@ private:
     float totalAmount;
     string status; // status will be pending
 
+public:
+
+    // Constructors
+    Order(const string& user, const list<CartItem>& items, float total) : username(user), totalAmount(total), status("Pending"){
+        orderId = ++orderCounter;
+
+        // copying the cart items to order
+        for(const auto& item : items){
+            orderedItems.push_back(item);
+        }
+    }
+
+
 
 };
 
