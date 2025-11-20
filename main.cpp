@@ -441,9 +441,11 @@ public:
 
     //override the function
     // serialize admin data to file
-    string serialize()const override{
-        stringstream ss;
-        ss<<"ADMIN|"<<username<<"|"<<password<<"|"<<email;
+    // converts the admin objects data into a single formatted string
+    // 
+    string serialize()const override{ // function is marked const because it doesn't modify any class member
+        stringstream ss; // string stream to build the output string
+        ss<<"ADMIN|"<<username<<"|"<<password<<"|"<<email; // separated by |
         return ss.str();
     }
 
