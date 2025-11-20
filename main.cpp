@@ -337,6 +337,9 @@ public:
 
     }
 
+    // destructor
+    ~Customer(){}
+
     // override the virtual function
     void displayInfo()const override{
         cout<<"  [Customer Profile]\n";
