@@ -474,6 +474,27 @@ void displayOrderSummary(const Order& order, const User& user){
 }
 
 
+// Function Templatee
+// reusable template function for displaying a list of objects of type T
+template<typename T>
+void displayList(const vector<T*>& items, const string& title){
+    cout<<"\n  === "<<title<<" ===\n"; // print the list title
+    if(items.empty()){
+        cout<<"  No items available.\n";
+        return;
+    }
+
+    // iterate over each item in the list
+    for(const auto& item : items){
+        item->displayDetails();
+        cout<<"  "<<string(50, '-')<<"\n"; // print a separator line
+    }
+
+}
+
+
+
+
 // Main system class for everything
 class ECommerceSystem{
 
