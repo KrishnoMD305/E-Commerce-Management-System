@@ -272,6 +272,17 @@ public:
 
 int Order::orderCounter = 1000; // initializing the static member
 
+
+class User{
+protected:
+
+
+public:
+
+
+};
+
+
 // Main system class for everything
 class ECommerceSystem{
 
