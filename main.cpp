@@ -202,8 +202,22 @@ public:
         return total;
     }
 
+    // returns a constant reference to a list of CartItem objects
+    const list<CartItem>& getItems()const{
+        return items;
+    }
 
-    
+
+    // clear the list 
+    void clearCart(){
+        items.clear();
+    }
+
+    // checks if list is empty
+    bool isEmpty()const{
+        return items.empty();
+    }
+
 
 };
 
