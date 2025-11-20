@@ -234,7 +234,7 @@ private:
 
 public:
 
-    // Constructors
+    // Constructor
     Order(const string& user, const list<CartItem>& items, float total) : username(user), totalAmount(total), status("Pending"){
         orderId = ++orderCounter;
 
@@ -244,6 +244,20 @@ public:
         }
     }
 
+    // display the order items 
+    void displayOrder()const{
+        cout<<"\n  === ORDER #"<<orderId<<" ===\n";
+        cout<<"  Customer: "<<username<<"\n";
+        cout<<"  Status: "<<status<<"\n";
+        cout<<"  Items:\n";
+
+        // show the item names and the quantity
+        for(const auto& item : orderedItems){
+            cout<<"    - "<<item.product->getName()<<" x"<<item.quantity<<"\n";
+        }
+
+        cout<<"  Total Amount: $"<<totalAmount<<"\n";
+    }
 
 
 };
