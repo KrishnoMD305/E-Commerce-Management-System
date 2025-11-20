@@ -492,7 +492,11 @@ void displayList(const vector<T*>& items, const string& title){
 
 }
 
+// class template
+template<typename T>
+class Repository{
 
+};
 
 
 // Main system class for everything
