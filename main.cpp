@@ -324,6 +324,11 @@ public:
 
 int User::totalUsers = 0; // initialize the static member
 
+// inherited from user
+class Customer: public User{
+
+};
+
 // Main system class for everything
 class ECommerceSystem{
 
