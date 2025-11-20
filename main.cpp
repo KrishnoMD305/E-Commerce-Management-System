@@ -1,6 +1,7 @@
 #include<iostream>
 #include<sstream> // for string string manipulation
 #include<list> // for list<> stl container
+#include<vector> // for vector<> STL container
 using namespace std;
 
 
@@ -224,11 +225,18 @@ public:
 
 class Order{
 private:
-    
+    static int orderCounter; // static member for order id generation
+    int orderId;
+    string username;
+    vector<CartItem> orderedItems;
+    float totalAmount;
+    string status; // status will be pending
 
 
 };
 
+
+int Order::orderCounter = 1000; // initializing the static member
 
 // Main system class for everything
 class ECommerceSystem{
