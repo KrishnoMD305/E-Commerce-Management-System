@@ -259,6 +259,13 @@ public:
         cout<<"  Total Amount: $"<<totalAmount<<"\n";
     }
 
+    // getter methods
+    int getOrderId()const{
+        return orderId;
+    }
+    float getTotalAmount()const{
+        return totalAmount;
+    }
 
 };
 
