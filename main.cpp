@@ -2,6 +2,7 @@
 #include<sstream> // for string string manipulation
 #include<list> // for list<> stl container
 #include<vector> // for vector<> STL container
+#include<map> // for map<> STL container
 using namespace std;
 
 // forward declaration
@@ -495,6 +496,20 @@ void displayList(const vector<T*>& items, const string& title){
 // class template
 template<typename T>
 class Repository{
+private:
+    map<int, T*> storage;
+    string filename;
+
+public: 
+// Constructor and destructor
+    Repository(const string& file) : filename(file){}
+    ~Repository(){
+        for(auto& pair : storage){
+            delete pair.second;
+        }
+    }
+
+    
 
 };
 
