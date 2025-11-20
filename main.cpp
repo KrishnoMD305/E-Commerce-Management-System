@@ -386,11 +386,25 @@ public:
         for(const auto& item : cart.getItems()){
             item.product->reduceStock(item.quantity);
         }
-
+        // added the order to orderhistory
         orderHistory.push_back(newOrder);
         cout<<"\n  Order placed successfully! Order ID: "<<newOrder.getOrderId()<<"\n";
         cart.clearCart();
 
+    }
+
+    // view the history of order
+    void viewOrderHistory()const{
+        if(orderHistory.empty()){
+            cout<<"  No order history available.\n";
+            return;
+        }
+
+        cout<<"\n  === ORDER HISTORY ===\n";
+
+        for(const auto& order : orderHistory){
+            order.displayOrder();
+        }
     }
 
 
