@@ -275,13 +275,21 @@ int Order::orderCounter = 1000; // initializing the static member
 
 class User{
 protected:
-
+// attributes for users
+    string username;
+    string password;
+    string email;
+    static int totalUsers; //
 
 public:
-
+    // Constructor
+    User(string uname, string pass, string mail) : username(uname), password(pass), email(mail){
+        totalUsers++;
+    }
 
 };
 
+int User::totalUsers = 0; // initialize the static member
 
 // Main system class for everything
 class ECommerceSystem{
