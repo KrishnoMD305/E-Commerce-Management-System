@@ -413,6 +413,15 @@ public:
 
 };
 
+// also inherited from user
+class Admin: public User{
+public:
+
+
+
+};
+
+
 // Main system class for everything
 class ECommerceSystem{
 
