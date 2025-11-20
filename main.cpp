@@ -439,6 +439,10 @@ public:
         return "Admin";
     }
 
+    string serialize()const override{
+        
+    }
+
 
 };
 
