@@ -497,7 +497,7 @@ void displayList(const vector<T*>& items, const string& title){
 template<typename T>
 class Repository{
 private:
-    map<int, T*> storage;
+    map<int, T*> storage; // container
     string filename;
 
 public: 
@@ -509,10 +509,12 @@ public:
         }
     }
 
+    // add or replaces an object
     void add(int key, T* item){
         storage[key] = item;
     }
 
+    // get object associated with specified key
     T* get(int key){
         auto it = storage.find(key);
         if(it != storage.end()){
@@ -521,6 +523,7 @@ public:
         return nullptr;
     }
 
+    // list of all storage objects
     vector<T*> getAll(){
         vector<T*> result;
         for(auto& pair : storage){
@@ -529,6 +532,7 @@ public:
         return result;
     }
 
+    //delete the object and key
     void remove(int key){
         auto it = storage.find(key);
         if(it != storage.end()){
@@ -537,14 +541,17 @@ public:
         }
     }
 
+    // chk whether the given key exists
     bool exists(int key){
         return storage.find(key) != storage.end();
     }
 
+    // returns the number of objects
     int size()const{
         return storage.size();
     }
 
+    // freeing memory
     void clear(){
         for(auto& pair : storage){
             delete pair.second;
@@ -552,6 +559,7 @@ public:
         storage.clear();
     }
 
+    //direct access to map
     map<int, T*>& getStorage(){
         return storage;
     }
