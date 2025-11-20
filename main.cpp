@@ -303,6 +303,23 @@ public:
         return "User";
     }
 
+    // pure virtual function
+    virtual string serialize() const = 0;
+
+    // getters methods
+    string getUsername()const{
+        return username;
+    }
+    string getPassword()const{
+        return password;
+    }
+    string getEmail()const{
+        return email;
+    }
+    static int getTotalUsers(){
+        return totalUsers;
+    }
+
 };
 
 int User::totalUsers = 0; // initialize the static member
