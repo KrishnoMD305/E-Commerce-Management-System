@@ -439,8 +439,12 @@ public:
         return "Admin";
     }
 
+    //override the function
+    // serialize admin data to file
     string serialize()const override{
-        
+        stringstream ss;
+        ss<<"ADMIN|"<<username<<"|"<<password<<"|"<<email;
+        return ss.str();
     }
 
 
