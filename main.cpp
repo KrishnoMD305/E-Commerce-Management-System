@@ -190,6 +190,20 @@ public:
         cout<<"  Total: $"<<total<<"\n"; // show total
     }
 
+    // calculate the total price that are available in carts
+    float calculateTotal()const{
+        float total = 0;
+        for(const auto& item : items){
+            // here item is CartItem struct type
+            // the product is Product type
+            // getPrice is the getter method for Product class
+            total += item.product->getPrice() * item.quantity;
+        }
+        return total;
+    }
+
+
+    
 
 };
 
