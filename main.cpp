@@ -4,6 +4,10 @@
 #include<vector> // for vector<> STL container
 using namespace std;
 
+// forward declaration
+class User;
+class Order; 
+
 
 class Product{
 protected:
@@ -267,6 +271,9 @@ public:
         return totalAmount;
     }
 
+    // friend function declaration
+    friend void displayOrderSummary(const Order& order, const User& user);
+
 };
 
 
@@ -319,6 +326,9 @@ public:
     static int getTotalUsers(){
         return totalUsers;
     }
+
+    // friend function declaration
+    friend void displayOrderSummary(const Order& order, const User& user);
 
 };
 
@@ -451,6 +461,11 @@ public:
 
 
 };
+
+
+void displayOrderSummary(const Order& order, const User& user){
+
+}
 
 
 // Main system class for everything
