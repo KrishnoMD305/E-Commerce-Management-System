@@ -357,6 +357,20 @@ public:
         return ss.str();
     }
 
+    // return the cart
+    Cart& getCart(){
+        return cart;
+    }
+
+    // added the product and quantity through customer
+    void addToCart(Product* p, int qty){
+        cart.addProduct(p,qty);
+    }
+    // display the cart
+    void viewCart()const{
+        cart.displayCart();
+    }
+
 
 };
 
