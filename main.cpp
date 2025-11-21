@@ -1136,7 +1136,7 @@ public:
 
     }
 
-
+    // registers a new admin user
     void registerAdmin(){
         string username, password, email, adminKey;
         cout<<"\n  === REGISTER NEW ADMIN ===\n";
@@ -1169,6 +1169,68 @@ public:
 
     }
 
+
+    // main control loop for the entire E-Commerce Management System
+    // displays the main menu and continuously processes user choices
+    // connects all major system functionalities
+    void run(){
+        displayWelcome();
+
+        while (true){
+            cout<<"\n  ========================================\n";
+            cout<<"  === MAIN MENU ===\n";
+            cout<<"  ========================================\n";
+            cout<<"  1. Customer Login\n";
+            cout<<"  2. Customer Registration\n";
+            cout<<"  3. Admin Login\n";
+            cout<<"  4. Admin Registration\n";
+            cout<<"  5. View System Info\n";
+            cout<<"  6. Exit\n";
+            cout<<"  ========================================\n";
+            cout<<"  Choose option: ";
+
+            int choice;
+            cin>>choice;
+
+            switch(choice){
+                case 1: // customer login
+                    if(login()){
+                        if(currentUser->getRole() == "Customer"){
+                            customerMenu();
+                        }else{
+                            cout<<"  This account is not a customer account.\n";
+                            currentUser = nullptr; // reset user
+                        }
+                    }
+                    break;
+                case 2:
+                    registerUser();
+                    break;
+                case 3:
+                    if(adminLogin()){
+                        adminMenu();
+                    }
+                    break;
+                case 4:
+                    registerAdmin();
+                    break;
+                case 5:
+                    displayStatistics();
+                    break;
+                case 6:
+                    cout<<"\n  Saving all data to files...\n";
+
+                    // all updated data is saved
+                    FileHandler::saveProducts(productRepo);
+                    FileHandler::saveUsers(userRepo);
+                    
+                    cout<<"\n  Thank you for using our E-Commerce System!\n\n";
+                    return;
+                default:
+                    cout<<"  Invalid option.\n";
+            }
+        }
+    }
 
 };
 
