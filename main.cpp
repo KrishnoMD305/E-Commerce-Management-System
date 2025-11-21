@@ -712,13 +712,17 @@ public:
     }
 
     // checks whether the required data files exist and are accessible for reading
+    /*
+    true-if both files can be successfully opened
+    false-if file cannot be accessed
+    */
     static bool filesExist(){
         ifstream pFile(PRODUCTS_FILE);
         ifstream uFile(USERS_FILE);
 
         // check if both files were successfully opened
-        bool exists = pFile.good() && uFile.good();
-        
+        bool exists = pFile.good() && uFile.good(); // good() returns true if the stream is usable state
+
         pFile.close();
         uFile.close();
 
