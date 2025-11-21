@@ -766,6 +766,22 @@ private:
 
 public:
 
+    ECommerceSystem() : productRepo("products.txt"),userRepo("users.txt"),currentUser(nullptr){
+
+        // check whether previously saved data are available
+        if(FileHandler::filesExist()){
+            cout<<"\n  [SYSTEM] Loading data from files...\n";
+
+            // load existing product and user data
+            FileHandler::loadProducts(productRepo);
+            FileHandler::loadUsers(userRepo);
+        }else{
+            cout<<"\n  [SYSTEM] No existing data found.\n";
+
+            // if no data files exist create initial sample products and users
+            initializeSampleData();
+        }
+    }
 
 
 
