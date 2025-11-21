@@ -942,7 +942,10 @@ public:
         }
     }
 
-
+    /*
+    This function uses runtime polymorphism(dynamic_cast)to ensure that the current user is an Admin
+    provides a menu-driven interface for managing products, system statistics, profile viewing
+    */
     void adminMenu(){
         //safely cast currentUser to Admin pointer
         Admin* admin = dynamic_cast<Admin*>(currentUser);
@@ -1089,7 +1092,7 @@ public:
 
                     FileHandler::loadProducts(productRepo);
                     FileHandler::loadUsers(userRepo);
-                    
+
                     cout<<"  Data reloaded successfully!\n";
                     break;
                 case 8:
@@ -1106,6 +1109,65 @@ public:
         }
     }
 
+
+    // handles the login process for admin users only
+    bool adminLogin(){
+        string username,password;
+        cout<<"\n  === ADMIN LOGIN ===\n";
+        cout<<"  Admin Username: ";
+        cin>>username;
+        cout<<"  Admin Password: ";
+        cin>>password;
+
+        // retrieve all users stored in the repository
+        vector<User*> allUsers = userRepo.getAll();
+
+        // search for a matching admin
+        auto it = find_if(allUsers.begin(), allUsers.end(), [&](User* u) {return u->getUsername() == username && u->getPassword() == password && u->getRole() == "Admin";});
+
+        if(it != allUsers.end()){
+            currentUser = *it; // store logged in admin
+            cout<<"\n  Admin login successful! Welcome, "<<currentUser->getUsername()<<"!\n";
+            return true;
+        }
+
+        cout << "\n  Invalid admin credentials. Access denied.\n";
+        return false;
+
+    }
+
+
+    void registerAdmin(){
+        string username, password, email, adminKey;
+        cout<<"\n  === REGISTER NEW ADMIN ===\n";
+
+        // ask for the admin authorization key
+        cout<<"  Admin Registration Key: ";
+        cin>>adminKey;
+
+        // security check
+        // only users know the predefined key "ADMIN2025" can register as admins
+        if(adminKey != "ADMIN2025"){
+            cout<<"\n  Invalid registration key. Admin registration denied.\n";
+            return; // stop the registration process
+        }
+
+        cout<<"  Username: ";
+        cin>>username;
+        cout<<"  Password: ";
+        cin>>password;
+        cout<<"  Email: ";
+        cin>>email;
+
+        int newId = userRepo.size() + 1; // generate a unique id for the new admin
+        userRepo.add(newId, new Admin(username, password, email)); // add new admin to repository
+
+        // save updated user list to file
+        FileHandler::saveUsers(userRepo);
+
+        cout << "\n  Admin registration successful! You can now login.\n";
+
+    }
 
 
 };
