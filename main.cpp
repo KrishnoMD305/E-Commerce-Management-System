@@ -3,6 +3,7 @@
 #include<list> // for list<> stl container
 #include<vector> // for vector<> STL container
 #include<map> // for map<> STL container
+#include<fstream> // for input and output manipulation
 using namespace std;
 
 // forward declaration
@@ -577,6 +578,32 @@ private:
     static const string USERS_FILE;
 
 public:
+
+// saves all products stored in the given repository to the file
+// serializes each Product object to a string and writes it line by line into the file
+    static void saveProducts(Repository<Product>& repo){ // static because not object specified
+        ofstream file(PRODUCTS_FILE);
+        if(!file.is_open()){
+            cout<<"  [ERROR] Unable to open products file for writing.\n";
+            return;
+        }
+
+        vector<Product*> products = repo.getAll(); // retrieve all stored Product objects from the repository
+        
+        // iterate through each Product and write its serialized representation
+        for(const auto& product : products){
+            file<<product->serialize()<<"\n";
+        }
+        file.close();
+        cout<<"  [FILE] Products saved successfully!\n";
+    }
+
+
+    static void loadProducts(Repository<Product>& repo){
+        
+    }
+
+
 
 };
 
