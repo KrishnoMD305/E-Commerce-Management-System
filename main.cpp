@@ -566,6 +566,24 @@ public:
 
 };
 
+// handles all I/O operations
+class FileHandler{
+private:
+// holds the filename or path where product data will be stored or loaded.
+    // declared as static so only one copy exists for the entire class
+    // const ensures the file path cannot be modified after initialization
+    static const string PRODUCTS_FILE;
+    // store the filename for user related data
+    static const string USERS_FILE;
+
+public:
+
+};
+
+// initialize the static variables
+const string FileHandler::PRODUCTS_FILE = "products.txt";
+const string FileHandler::USERS_FILE = "users.txt";
+
 
 // Main system class for everything
 class ECommerceSystem{
