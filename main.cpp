@@ -791,7 +791,22 @@ public:
         FileHandler::saveUsers(userRepo);
     }
 
+    // displays the welcome message for the management system.
+    void displayWelcome(){
+        cout<<"\n";
+        cout<<"  ========================================\n";
+        cout<<"      E-COMMERCE MANAGEMENT SYSTEM\n";
+        cout<<"      (With File Persistence)\n";
+        cout<<"  ========================================\n";
+    }
 
+    // provides quick overview of the current state of the e-commerce system
+    void displayStatistics(){
+        cout<<"\n  === SYSTEM STATISTICS ===\n";
+        cout<<"  Total Products: "<<Product::getTotalProducts()<<"\n";
+        cout<<"  Total Users: "<<User::getTotalUsers()<<"\n";
+        cout<<"  Products in Catalog: "<<productRepo.size()<<"\n";
+    }
 
 
 };
