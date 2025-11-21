@@ -738,6 +738,37 @@ const string FileHandler::USERS_FILE = "users.txt";
 
 // Main system class for everything
 class ECommerceSystem{
+private:
+    Repository<Product> productRepo;
+    Repository<User> userRepo;
+    User* currentUser;
+
+
+    void initializeSampleData(){
+        cout<<"\n  [SYSTEM] Initializing sample data...\n";
+        //
+        // adding sample products
+        productRepo.add(1, new DigitalProduct(1, "Ebook: C++ Mastery", 29.99, 100, "http://download.link/cpp", 5.2));
+        productRepo.add(2, new DigitalProduct(2, "Software: Code Editor Pro", 49.99, 50, "http://download.link/editor", 250.5));
+        productRepo.add(3, new PhysicalProduct(3, "Laptop Stand", 39.99, 30, 1.2, "30x25x5 cm"));
+        productRepo.add(4, new PhysicalProduct(4, "Wireless Mouse", 24.99, 75, 0.15, "12x7x4 cm"));
+        productRepo.add(5, new PhysicalProduct(5, "Mechanical Keyboard", 89.99, 20, 0.8, "45x15x3 cm"));
+
+        // adding sample users
+        userRepo.add(1, new Customer("alice", "pass123", "alice@example.com"));
+        userRepo.add(2, new Customer("bob", "pass456", "bob@example.com"));
+        userRepo.add(3, new Admin("admin", "admin123", "admin@ecommerce.com"));
+
+        FileHandler::saveProducts(productRepo);
+        FileHandler::saveUsers(userRepo);
+        cout<<"  [SYSTEM] Sample data initialized and saved to files!\n";
+    }
+
+public:
+
+
+
+
 
 };
 
