@@ -868,8 +868,13 @@ public:
         cout << "\n  Registration successful! You can now login.\n";
     }
 
-
+    /*
+    This function uses runtime polymorphism to cast the current user into a 
+    Customer object and then provides an interactive menu for browsing products, adding items to cart, 
+    viewing the cart, placing orders, checking order history, and viewing profile information
+    */
     void customerMenu(){
+        // cast currentUser-base class pointer-to a Customer pointer
         Customer* customer = dynamic_cast<Customer*>(currentUser); // Runtime polymorphism
         if (!customer) return;
 
@@ -889,6 +894,7 @@ public:
 
             switch(choice){
                 case 1:
+                // displays product catalog
                     displayList(productRepo.getAll(),"PRODUCT CATALOG");
                     break;
                 case 2:
@@ -898,28 +904,32 @@ public:
                     cout<<"  Enter Quantity: ";
                     cin>>qty;
 
+                    // retrieve product by id
                     Product* p = productRepo.get(productId);
 
+                    // validate product existence and stock avilability
                     if(p && p->getStock() >= qty){
                         customer->addToCart(p, qty);
+                        // type conversion Product to float
                         float price = static_cast<float>(*p);
                         cout<<"  Product price: $"<<price<<"\n";
                     }else{
                         cout<<"  Product not found or insufficient stock.\n";
                     }
                     break;
-                case 3:
+                case 3: // view cart
                     customer->viewCart();
                     break;
-                case 4:
+                case 4: // place order
                     customer->placeOrder();
+                    // save updated product stock to file
                     FileHandler::saveProducts(productRepo);
                     break;
-                case 5:
+                case 5: // view order history
                     customer->viewOrderHistory();
                     break;
                 case 6:
-                    customer->displayInfo(); 
+                    customer->displayInfo(); //runtime polymorphism
                     break;
                 case 7:
                     currentUser = nullptr;
