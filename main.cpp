@@ -598,9 +598,60 @@ public:
         cout<<"  [FILE] Products saved successfully!\n";
     }
 
-
+    // loads product data from the file and adds each product and and stores them in the repository
     static void loadProducts(Repository<Product>& repo){
-        
+        ifstream file(PRODUCTS_FILE);
+
+        if(!file.is_open()){
+            cout<<"  [FILE] Products file not found. Creating new file...\n";
+            return;
+        }
+        string line;
+
+        // read the file line by line
+        // each line represents a serialized product
+        while(getline(file, line)){
+            // skip empty lines to avoid errors or empty product
+            if(line.empty()) continue;
+
+            // load the serialized line into a stringstream for extraction
+            stringstream ss(line);
+            // product fields
+            string type, name, link, dimensions;
+            int id, stock;
+            float price, fileSize, weight;
+
+            // extract id, price, stock
+            getline(ss, type, '|');
+            ss>>id; // 
+            ss.ignore(); // skip delimiter
+            getline(ss, name, '|');
+            ss>>price;
+            ss.ignore(); // skip delimiter
+            ss>>stock;
+            ss.ignore(); // skip delimiter
+
+            if(type == "DIGITAL"){
+                // extract link and file size
+                getline(ss, link, '|');
+                ss>>fileSize;
+
+                // add the reconstructed digital to the repository
+                repo.add(id, new DigitalProduct(id, name, price, stock, link, fileSize));
+            }else if(type == "PHYSICAL"){
+                ss>>weight;
+                ss.ignore();
+                getline(ss,dimensions);
+
+                // add the reconstructed physical to the repository
+                repo.add(id, new PhysicalProduct(id,name,price,stock,weight,dimensions));
+            }
+
+        }
+
+        file.close();
+        cout<<"  [FILE] Loaded "<<repo.size()<<" products from file.\n";
+
     }
 
 
