@@ -1,0 +1,5 @@
+DIGITAL|1|Ebook: C++ Mastery|29.99|100|http://download.link/cpp|5.2
+DIGITAL|2|Software: Code Editor Pro|49.99|50|http://download.link/editor|250.5
+PHYSICAL|3|Laptop Stand|39.99|30|1.2|30x25x5 cm
+PHYSICAL|4|Wireless Mouse|24.99|75|0.15|12x7x4 cm
+PHYSICAL|5|Mechanical Keyboard|89.99|20|0.8|45x15x3 cm

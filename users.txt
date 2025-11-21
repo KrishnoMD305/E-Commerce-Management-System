@@ -1,0 +1,3 @@
+CUSTOMER|alice|pass123|alice@example.com
+CUSTOMER|bob|pass456|bob@example.com
+ADMIN|admin|admin123|admin@ecommerce.com
