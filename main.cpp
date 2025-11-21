@@ -342,6 +342,11 @@ public:
         return totalUsers;
     }
 
+    // operator overloading compare users by username 
+    bool operator==(const User& other) const {
+        return this->username == other.username;
+    }
+
     // friend function declaration
     friend void displayOrderSummary(const Order& order, const User& user);
 
