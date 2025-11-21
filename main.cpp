@@ -832,16 +832,40 @@ public:
             return true;
         }
 
-
+        // if no user matched failed login
         cout<<"\n  Invalid credentials. Please try again.\n";
         return false;
 
 
     }
 
+// allows a new user to register an account in the system
+    void registerUser(){
+        string username, password, email;
+        cout<<"\n  === REGISTER NEW USER ===\n";
 
+        cout<<"  Username: ";
+        cin>>username;
+
+        cout<<"  Password: ";
+        cin>>password;
+
+        cout<<"  Email: ";
+        cin>>email;
+
+        // ensures unique incremental id
+        int newId = userRepo.size() + 1;
+        // create a new Customer object and add to the repository
+        userRepo.add(newId, new Customer(username, password, email));
+
+        //save all users to the file
+        FileHandler::saveUsers(userRepo);
+
+        cout << "\n  Registration successful! You can now login.\n";
+    }
 
     
+
 };
 
 int main(){
