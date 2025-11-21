@@ -64,7 +64,10 @@ public:
         return totalProducts;
     }
 
-
+    // operator overloading compare by product id
+    bool operator==(const Product& other) const {
+        return this->id == other.id;
+    }
 
 
 };
@@ -1223,7 +1226,7 @@ public:
                     // all updated data is saved
                     FileHandler::saveProducts(productRepo);
                     FileHandler::saveUsers(userRepo);
-                    
+
                     cout<<"\n  Thank you for using our E-Commerce System!\n\n";
                     return;
                 default:
