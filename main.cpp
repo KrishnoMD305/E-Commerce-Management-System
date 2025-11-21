@@ -910,7 +910,7 @@ public:
                 // displays product catalog
                     displayList(productRepo.getAll(),"PRODUCT CATALOG");
                     break;
-                case 2:
+                case 2:{
                     int productId, qty;
                     cout<<"  Enter Product ID: ";
                     cin>>productId;
@@ -930,6 +930,7 @@ public:
                         cout<<"  Product not found or insufficient stock.\n";
                     }
                     break;
+                }
                 case 3: // view cart
                     customer->viewCart();
                     break;
