@@ -4,6 +4,7 @@
 #include<vector> // for vector<> STL container
 #include<map> // for map<> STL container
 #include<fstream> // for input and output manipulation
+#include<algorithm> // for necessary built in algorithm
 using namespace std;
 
 // forward declaration
@@ -808,7 +809,39 @@ public:
         cout<<"  Products in Catalog: "<<productRepo.size()<<"\n";
     }
 
+    // handles user authentication by asking for a username and password
+    bool login(){
+        string username,password;
+        cout<<"\n  === LOGIN ===\n";
+        cout<<"  Username: ";
+        cin>>username;
+        cout<<"  Password: ";
+        cin>>password;
 
+        // retrieve all registered users from the repository
+        vector<User*> allUsers = userRepo.getAll();
+
+        // search through all users and locate a user
+        // [&](User* u)-lambda capturing variables by reference
+        // returns bool checks if both username and password match
+        auto it = find_if(allUsers.begin(),allUsers.end(),[&](User* u){return u->getUsername() == username && u->getPassword() == password;});
+
+        if(it != allUsers.end()){
+            currentUser = *it; // store the logged-in user
+            cout<<"\n  Login successful! Welcome, "<<currentUser->getUsername()<<"!\n";
+            return true;
+        }
+
+
+        cout<<"\n  Invalid credentials. Please try again.\n";
+        return false;
+
+
+    }
+
+
+
+    
 };
 
 int main(){
