@@ -942,6 +942,172 @@ public:
         }
     }
 
+
+    void adminMenu(){
+        //safely cast currentUser to Admin pointer
+        Admin* admin = dynamic_cast<Admin*>(currentUser);
+        if(!admin) return;
+
+        while(true){
+            cout<<"\n  === ADMIN MENU ===\n";
+            cout<<"  1. View All Products\n";
+            cout<<"  2. Add New Product\n";
+            cout<<"  3. Remove Product\n";
+            cout<<"  4. Update Product Price\n";
+            cout<<"  5. Update Product Stock\n";
+            cout<<"  6. View System Statistics\n";
+            cout<<"  7. Reload Data from Files\n";
+            cout<<"  8. View Profile\n";
+            cout<<"  9. Logout\n";
+            cout<<"  Choose option: ";
+
+            int choice;
+            cin>>choice;
+
+            switch(choice){
+
+                case 1: // view all products
+                    displayList(productRepo.getAll(), "ALL PRODUCTS");
+                    break;
+
+                case 2: { //add new product
+                    int id, type, stock;
+                    string name;
+                    float price;
+
+                    cout<<"  Product ID: ";
+                    cin>>id;
+                    cin.ignore();
+
+                    cout<<"  Product Name: ";
+                    getline(cin, name);
+
+                    cout<<"  Price: $";
+                    cin>>price;
+
+                    cout<<"  Stock: ";
+                    cin>>stock;
+
+                    cout<<"  Type (1=Digital, 2=Physical): ";
+                    cin>>type;
+
+                    // digital product
+                    if(type == 1){
+                        string link;
+                        float size;
+
+                        cout<<"  Download Link: ";
+                        cin>>link;
+
+                        cout<<"  File Size (MB): ";
+                        cin>>size;
+
+                        productRepo.add(id, new DigitalProduct(id,name,price,stock,link,size));
+                    }else{ // physical product
+                        float weight;
+                        string dim;
+
+                        cout<<"  Weight (kg): ";
+                        cin>>weight;
+                        cin.ignore();
+
+                        cout<<"  Dimensions: ";
+                        getline(cin, dim);
+
+                        productRepo.add(id, new PhysicalProduct(id,name,price,stock,weight,dim));
+                    }
+
+                    // save newly added product to file
+                    FileHandler::saveProducts(productRepo);
+                    cout<<"  Product added and saved to file!\n";
+                    break;
+                }
+                case 3: { // remove product
+                    int id;
+                    cout<<"  Enter Product ID to remove: ";
+                    cin>>id;
+
+                    productRepo.remove(id);
+
+                    // save changes to file
+                    FileHandler::saveProducts(productRepo);
+                    cout<<"  Product removed and changes saved!\n";
+                    break;
+                }
+                case 4: {
+                    int id;
+                    float newPrice;
+
+                    cout<<"  Enter Product ID: ";
+                    cin>>id;
+
+                    cout<<"  Enter new price: $";
+                    cin>>newPrice;
+
+                    Product* p = productRepo.get(id);
+
+                    if(p){
+                        p->setPrice(newPrice);
+
+                        // save updated stock
+                        FileHandler::saveProducts(productRepo);
+                        cout<<"  Price updated and saved!\n";
+                    }else{
+                        cout<<"  Product not found.\n";
+                    }
+                    break;
+                }
+                case 5: { 
+                    int id, newStock;
+
+                    cout<<"  Enter Product ID: ";
+                    cin>>id;
+
+                    cout<<"  Enter new stock: ";
+                    cin>>newStock;
+
+                    Product* p = productRepo.get(id);
+
+                    if(p){
+                        p->setStock(newStock);
+                        FileHandler::saveProducts(productRepo);
+                        cout<<"  Stock updated and saved!\n";
+                    }else{
+                        cout<<"  Product not found.\n";
+                    }
+                    break;
+                }
+                case 6: //system statistics
+                    displayStatistics();
+                    break;
+                case 7: // reload data from files
+                    cout<<"\n  Reloading data from files...\n";
+
+                    // reset repositories before reloading
+                    productRepo.clear();
+                    userRepo.clear();
+
+                    FileHandler::loadProducts(productRepo);
+                    FileHandler::loadUsers(userRepo);
+                    
+                    cout<<"  Data reloaded successfully!\n";
+                    break;
+                case 8:
+                    admin->displayInfo(); 
+                    break;
+                case 9:
+                    currentUser = nullptr;
+                    return;
+                default:
+                    cout<<"  Invalid option.\n";
+            }
+
+
+        }
+    }
+
+
+
 };
 
 int main(){
