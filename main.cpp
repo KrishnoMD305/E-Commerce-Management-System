@@ -711,7 +711,19 @@ public:
         cout<<"  [FILE] Loaded "<<repo.size()<<" users from file.\n";
     }
 
+    // checks whether the required data files exist and are accessible for reading
+    static bool filesExist(){
+        ifstream pFile(PRODUCTS_FILE);
+        ifstream uFile(USERS_FILE);
 
+        // check if both files were successfully opened
+        bool exists = pFile.good() && uFile.good();
+        
+        pFile.close();
+        uFile.close();
+
+        return exists; // return true only if both files were accessible
+    }
 
 };
 
