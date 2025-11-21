@@ -233,6 +233,11 @@ public:
         return items.empty();
     }
 
+    // opearetor overloading to add product in the cart
+    Cart& operator+=(Product* p) {
+        addProduct(p, 1);
+        return *this;
+    }
 
 };
 
