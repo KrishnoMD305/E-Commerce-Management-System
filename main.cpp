@@ -765,7 +765,7 @@ private:
     }
 
 public:
-
+    // Constructor
     ECommerceSystem() : productRepo("products.txt"),userRepo("users.txt"),currentUser(nullptr){
 
         // check whether previously saved data are available
@@ -781,6 +781,14 @@ public:
             // if no data files exist create initial sample products and users
             initializeSampleData();
         }
+    }
+
+    // destructor
+    ~ECommerceSystem(){
+        cout<<"\n System shutting down...\n";
+        // final saving
+        FileHandler::saveProducts(productRepo);
+        FileHandler::saveUsers(userRepo);
     }
 
 
