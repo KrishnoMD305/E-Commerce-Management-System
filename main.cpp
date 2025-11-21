@@ -673,6 +673,46 @@ public:
         cout<<"  [FILE] Users saved successfully!\n";
     }
 
+    // loads all user data from file
+    static void loadUsers(Repository<User>& repo){
+        ifstream file(USERS_FILE);
+        if(!file.is_open()){
+            cout<<"  [FILE] Users file not found. Creating new file...\n";
+            return;
+        }
+
+        string line;
+        int idCounter = 1; // assign increasing id to loaded users
+
+        // read the file linebyline
+        // each line contains one serialized User entry
+        while(getline(file, line)){
+            // skip empty lines to avoid unnecessary parsing
+            if(line.empty()) continue;
+
+            stringstream ss(line); // use stringstream to extract the serialized user fields
+            string type, username, password, email;
+
+            // extract each field separated by |
+            getline(ss,type, '|');
+            getline(ss,username, '|');
+            getline(ss,password, '|');
+            getline(ss,email);
+
+            // determine the type of User
+            if(type == "CUSTOMER"){
+                repo.add(idCounter++, new Customer(username,password,email));
+            }else if(type == "ADMIN"){
+                repo.add(idCounter++, new Admin(username,password,email));
+            }
+        }
+
+        file.close();
+        cout<<"  [FILE] Loaded "<<repo.size()<<" users from file.\n";
+    }
+
+
+
 };
 
 // initialize the static variables
