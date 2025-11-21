@@ -39,7 +39,11 @@ public:
     virtual string getType()const = 0;
     virtual string serialize()const = 0;
 
-
+    // Type conversion
+    //convert product to float
+    operator float() const {
+        return price;
+    }
 
     // getters method 
     // used const so that the function cannot modify the data
@@ -864,7 +868,69 @@ public:
         cout << "\n  Registration successful! You can now login.\n";
     }
 
-    
+
+    void customerMenu(){
+        Customer* customer = dynamic_cast<Customer*>(currentUser); // Runtime polymorphism
+        if (!customer) return;
+
+        while(true){
+            cout<<"\n  === CUSTOMER MENU ===\n";
+            cout<<"  1. Browse Products\n";
+            cout<<"  2. Add Product to Cart\n";
+            cout<<"  3. View Cart\n";
+            cout<<"  4. Place Order\n";
+            cout<<"  5. View Order History\n";
+            cout<<"  6. View Profile\n";
+            cout<<"  7. Logout\n";
+            cout<<"  Choose option: ";
+
+            int choice;
+            cin>>choice;
+
+            switch(choice){
+                case 1:
+                    displayList(productRepo.getAll(),"PRODUCT CATALOG");
+                    break;
+                case 2:
+                    int productId, qty;
+                    cout<<"  Enter Product ID: ";
+                    cin>>productId;
+                    cout<<"  Enter Quantity: ";
+                    cin>>qty;
+
+                    Product* p = productRepo.get(productId);
+
+                    if(p && p->getStock() >= qty){
+                        customer->addToCart(p, qty);
+                        float price = static_cast<float>(*p);
+                        cout<<"  Product price: $"<<price<<"\n";
+                    }else{
+                        cout<<"  Product not found or insufficient stock.\n";
+                    }
+                    break;
+                case 3:
+                    customer->viewCart();
+                    break;
+                case 4:
+                    customer->placeOrder();
+                    FileHandler::saveProducts(productRepo);
+                    break;
+                case 5:
+                    customer->viewOrderHistory();
+                    break;
+                case 6:
+                    customer->displayInfo(); 
+                    break;
+                case 7:
+                    currentUser = nullptr;
+                    return;
+                default:
+                    cout<<"  Invalid option.\n";
+
+            }
+
+        }
+    }
 
 };
 
