@@ -654,7 +654,24 @@ public:
 
     }
 
+    // saves all User objects to the file
+    static void saveUsers(Repository<User>& repo){
+        ofstream file(USERS_FILE);
+        if(!file.is_open()){
+            cout<<"  [ERROR] Unable to open users file for writing.\n";
+            return;
+        }
 
+        vector<User*> users = repo.getAll(); // retrieve all User objects
+
+        // iterate over each User and save serialized form to the file
+        for(const auto& user : users){
+            file<<user->serialize()<<"\n"; // write one user per line
+        }
+
+        file.close();
+        cout<<"  [FILE] Users saved successfully!\n";
+    }
 
 };
 
