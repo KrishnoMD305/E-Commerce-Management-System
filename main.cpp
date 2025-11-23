@@ -115,7 +115,7 @@ public:
 
         // DIGITAL|id|name|price|stock|downloadLink|fileSize
         ss<<"DIGITAL|"<<id<<"|"<<name<<"|"<<price<<"|"<<stock<<"|"<<downloadLink<<"|"<<fileSize;
-        
+
         return ss.str();
     }
 
@@ -124,6 +124,7 @@ public:
 };
 
 // also inherited from product
+// derived class represent a physical product
 class PhysicalProduct:public Product{
 private:
 // physical products attributes
@@ -132,6 +133,7 @@ private:
 
 public:
     //constructor
+    // initializes base product field and physical product
     PhysicalProduct(int i, string n, float p, int s, float w, string dim): Product(i,n,p,s), weight(w), dimensions(dim){}
 
 
@@ -151,9 +153,13 @@ public:
 
 
     // arrange the product detailes for file storage
+    // serialize object data in formatted string
     string serialize()const override{
         stringstream ss;
+
+        // PHYSICAL|id|name|price|stock|weight|dimensions
         ss<<"PHYSICAL|"<<id<<"|"<<name<<"|"<<price<<"|"<<stock<<"|"<<weight<<"|"<<dimensions;
+        
         return ss.str(); //
         // convert the stream into string and returns it
     }
