@@ -79,14 +79,17 @@ public:
 int Product::totalProducts = 0; //initializes the static variable
 
 // Inherited from product
+// derived class represents a digital product
 class DigitalProduct:public Product{
-private:
-    string downloadLink;
+private: // private data members
+
+    string downloadLink; // URL to download the product
     float fileSize; //MB
 
 
 public:
     // Constructor
+    // initialize product base attributes and additional
     DigitalProduct(int i, string n, float p, int s, string link, float size): Product(i,n,p,s), downloadLink(link), fileSize(size){}
 
 
@@ -98,15 +101,21 @@ public:
         cout<<"  Download Link: "<<downloadLink<<" | Size: "<<fileSize<<" MB\n";
     }
 
+    // overridden gettype virtual function
     // get the type digital
     string getType()const override{
         return "Digital";
     }
 
+    // overridden serialize virtual function
     // serialize the digital products list for saving to file
+    // converts the object data into a single line format
     string serialize()const override{
         stringstream ss; 
+
+        // DIGITAL|id|name|price|stock|downloadLink|fileSize
         ss<<"DIGITAL|"<<id<<"|"<<name<<"|"<<price<<"|"<<stock<<"|"<<downloadLink<<"|"<<fileSize;
+        
         return ss.str();
     }
 
