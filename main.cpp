@@ -330,19 +330,22 @@ public:
 
 int Order::orderCounter = 1000; // initializing the static member
 
-
+// base abstract class representing a system user
 class User{
 protected:
 // attributes for users
-    string username;
+    string username; // unique username 
     string password;
     string email;
-    static int totalUsers; //
+
+    // static counter shared by all user objects
+    static int totalUsers; // used for tracking the total number of registered users
 
 public:
     // Constructor
+    // initializes a user with username, password, and email
     User(string uname, string pass, string mail) : username(uname), password(pass), email(mail){
-        totalUsers++;
+        totalUsers++; // increments totalusers counter after creation
     }
 
     // virtual destructor
@@ -351,7 +354,11 @@ public:
     }
 
     // virtual function for runtime polymorphismmm
+    // derived classes can override to show more details
+    //
     virtual void displayInfo()const{
+
+        // displays basic user account information
         cout<<"  Username: "<<username<<"\n";
         cout<<"  Email: "<<email<<"\n";
     }
@@ -362,6 +369,7 @@ public:
     }
 
     // pure virtual function
+    // must be implemented by all derived classes
     virtual string serialize() const = 0;
 
     // getters methods
@@ -374,11 +382,14 @@ public:
     string getEmail()const{
         return email;
     }
+
+    // static getter for total user count
     static int getTotalUsers(){
         return totalUsers;
     }
 
     // operator overloading compare users by username 
+    // for detecting duplicate accounts
     bool operator==(const User& other) const {
         return this->username == other.username;
     }
