@@ -159,7 +159,7 @@ public:
 
         // PHYSICAL|id|name|price|stock|weight|dimensions
         ss<<"PHYSICAL|"<<id<<"|"<<name<<"|"<<price<<"|"<<stock<<"|"<<weight<<"|"<<dimensions;
-        
+
         return ss.str(); //
         // convert the stream into string and returns it
     }
@@ -170,12 +170,17 @@ public:
 };
 
 // item + the quantity of that item
+// represent a single item in a shopping cart
 // The cart item will be a struct type
 struct CartItem{
-    Product* product;
+
+    // polymorphism allows pointing to digital product/physical product
+
+    Product* product; // pointer to the product added in the cart
     int quantity; // quantity of that product
 
     // Constructor
+    // initializes cart item using a product pointer and quantity
     CartItem(Product* p, int q): product(p),quantity(q) {}
 };
 
