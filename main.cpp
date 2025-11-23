@@ -8,41 +8,44 @@
 using namespace std;
 
 // forward declaration
+//because friend function is added
 class User;
 class Order; 
 
-
+// base abstract class representing a generic product
 class Product{
 protected:
     // attributes for products
-    int id;
-    string name;
-    float price;
-    int stock;
+    int id; // unique product id
+    string name; // name of the product
+    float price; // price of the product
+    int stock; // available stock quantity
+
+    // tracks how many total product objects have been created
     static int totalProducts; // it should be shared by all objects that's why static
 
 public:
     // Constructor
-    Product(int i, string n, float p, int s): id(i), name(n), price(p), stock(s){
+    Product(int i, string n, float p, int s): id(i), name(n), price(p), stock(s){ // initializes product attribute and increment product count
         totalProducts++; // increases static counter every time a new product is creted
     }
 
     // virtual destructor
-    virtual ~Product(){}
+    virtual ~Product(){} 
     // if not added a virtual destructor in base class it will not call child destructor
 
 
     // These functions will be overriden in child class
     // child classes will give self defination of their own
     // pure virtual function
-    virtual void displayDetails()const = 0;
-    virtual string getType()const = 0;
-    virtual string serialize()const = 0;
+    virtual void displayDetails()const = 0; // display productspecific details
+    virtual string getType()const = 0; // return category of the product
+    virtual string serialize()const = 0; // serialize deta into a string format
 
     // Type conversion
     //convert product to float
     operator float() const {
-        return price;
+        return price; // returning price
     }
 
     // getters method 
@@ -57,16 +60,17 @@ public:
     // 
     void setPrice(float p){price = p;}
     void setStock(int s){stock = s;}
-    void reduceStock(int qty){stock -= qty;}
+    void reduceStock(int qty){stock -= qty;} // reduce stock after sales
 
     // static function
+    // returns total number of product object created
     static int getTotalProducts(){
         return totalProducts;
     }
 
     // operator overloading compare by product id
     bool operator==(const Product& other) const {
-        return this->id == other.id;
+        return this->id == other.id; // compare product by id
     }
 
 
