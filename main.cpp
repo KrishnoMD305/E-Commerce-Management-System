@@ -267,18 +267,25 @@ public:
 };
 
 
+// represents a order created from a cart
 class Order{
-private:
+private: // private data members
+
+// atatic counter shared by all order objects
     static int orderCounter; // static member for order id generation
-    int orderId;
-    string username;
+
+    int orderId; // unique order id
+    string username; // name of the customer placed the order
     vector<CartItem> orderedItems;
-    float totalAmount;
+    float totalAmount; // total amount of the order
     string status; // status will be pending
 
 public:
 
     // Constructor
+    /* 
+    creates a new order using the customer's name, cart items and calculated total amount
+    */
     Order(const string& user, const list<CartItem>& items, float total) : username(user), totalAmount(total), status("Pending"){
         orderId = ++orderCounter;
 
@@ -304,14 +311,18 @@ public:
     }
 
     // getter methods
+    // returns the unique order id
     int getOrderId()const{
         return orderId;
     }
+
+    // returns the total value of the order
     float getTotalAmount()const{
         return totalAmount;
     }
 
     // friend function declaration
+    // for generating detailed order summaries
     friend void displayOrderSummary(const Order& order, const User& user);
 
 };
