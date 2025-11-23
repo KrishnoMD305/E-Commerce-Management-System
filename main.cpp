@@ -184,12 +184,12 @@ struct CartItem{
     CartItem(Product* p, int q): product(p),quantity(q) {}
 };
 
-
+// a shopping cart that stores multiple items
 class Cart{
 private:
 // the operation in list is O(1)
 // efficient
-    list<CartItem> items; 
+    list<CartItem> items; // container storing cartitem object
 
 public:
     // add product in cart method
@@ -209,7 +209,7 @@ public:
     }
 
     // Overloaded the addproduct function
-    void addProduct(Product* p){
+    void addProduct(Product* p){ 
         addProduct(p,1); // quantity = 1
     }
 
@@ -241,13 +241,14 @@ public:
         return total;
     }
 
-    // returns a constant reference to a list of CartItem objects
+    // returns a constant reference to a list of cartitem objects
     const list<CartItem>& getItems()const{
         return items;
     }
 
 
     // clear the list 
+    // removes all items from the cart
     void clearCart(){
         items.clear();
     }
@@ -258,9 +259,9 @@ public:
     }
 
     // opearetor overloading to add product in the cart
-    Cart& operator+=(Product* p) {
-        addProduct(p, 1);
-        return *this;
+    Cart& operator+=(Product* p){
+        addProduct(p,1);
+        return *this; // reference to the modified cart
     }
 
 };
